@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>Treadmill Controller</title>
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+    </head>
+    <body>
+        <div>
+            <input type="range"id="speed" orient="vertical" name="speed" min="0" max="100" value="0" style = "height:500px;width:200px"/>
+            <!-- <input type="range" orient="vertical" id="speed" name="speed" min="0" max="100" value="0" height=5000px/> -->
+            <label for="speed">Speed</label>
+        </div>
+        <button id="upButton">Up</button>
+        <button id="downButton">Down</button>
+        <script>
+            var app = {
+                initialize: function() {
+                    // bind events
+                    upButton.addEventListener('click', this.up, false);
+                    downButton.addEventListener('click', this.down, false);
+                    speed.addEventListener('change', this.setSpeed, false);
+                },
+                up: async function() {
+                    console.log("Up");
+                    const response = await fetch("/up");
+                    const text = await response.text();
+                    console.log(text);
+                },
+                down: async function() {
+                    console.log("Down");
+                    const response = await fetch("/down");
+                    const text = await response.text();
+                    console.log(text);
+                },
+                setSpeed: async function() {
+                    console.log(`Set the speed to ${speed.value}`);
+                    const response = await fetch(`/speed/${speed.value}`);
+                    const text = await response.text();
+                    console.log(text);
+                }
+            }
+            app.initialize();
+        </script>
+    </body>
+</html>
