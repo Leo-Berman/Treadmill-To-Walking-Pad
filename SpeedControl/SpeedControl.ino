@@ -13,10 +13,11 @@ void setup() {
   Serial.println("I am in setup");
   
   // analogWrite(TREADMILL_MOTOR_PIN, val);
-  timed_run(3, 100);
+  timed_run(3, 25);
   timed_run(3, 50);
-  // timed_run(3, 0);
-  run(25);
+  timed_run(3, 100);
+  // run(25);
+  timed_run(3, 0);
   // Serial.println("I have exited the speed control program");
 }
 
