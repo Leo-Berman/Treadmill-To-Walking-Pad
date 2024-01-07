@@ -1,6 +1,9 @@
 int speed = 0;
 int output_pin = 9;
 int val = "-1";
+int IN1 = 12;
+int IN2 = 7;
+
 void setup() {
 
   pinMode(output_pin, OUTPUT);
@@ -42,8 +45,32 @@ void loop(){
   }
 }
 void change_incline(int input){
-  ;
+  if (input == 1){
+    enable_k1();
+    delay(1000);
+    off();
+  }
+  else if (input == 2){
+    enable_k2();
+    delay(1000);
+    off();
+  }
 }
+
+void enable_k1(){
+  digitalWrite(IN1,HIGH);
+}
+
+void enable_k2(){
+  digitalWrite(IN1,LOW);
+  digitalWrite(IN2,HIGH);
+}
+
+void off(){
+  digitalWrite(IN1,LOW);
+  digitalWrite(IN2,LOW);
+}
+
 void run(int percent_power) {
   int val = map(percent_power, 0, 100, 0, 255);
   analogWrite(output_pin, val);
