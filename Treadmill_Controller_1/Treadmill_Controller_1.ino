@@ -1,3 +1,8 @@
+/* Leo Berman and Liam Coleman
+leo.berman@temple.edu
+liam@megster.com
+1/8/2024
+*/
 /* Declare Global Variables*/
 int speed_pin = 9; // Output PWM pin that controls thte speed of the treadmill
 
