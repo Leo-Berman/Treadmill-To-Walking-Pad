@@ -27,33 +27,30 @@ def speed(value):
 def up():
     print("Increasing incline")
     incline(2)
-    # TODO send to Arduino with PySerial
     return "Ok"
 
 @app.route("/down")
 def down():
     print("Decreasing incline")
     incline(1)
-    # TODO send to Arduino with PySerial
     return "Ok"
 
 @app.route("/inclineStop")
 def stop():
     print("Stopping incline")
     incline(3)
-    # TODO send to Arduino with PySerial
     return "Ok"
 
 def incline(direction: int):
     print(f"Setting incline to {direction}")
-    # ser = serial.Serial('/dev/tty.usbmodem1101')
-    # print(ser.name) 
-    # ser.write(f"I {direction}".encode("utf-8"))
-    # ser.close()
+    ser = serial.Serial('/dev/tty.usbmodem1101')
+    print(ser.name) 
+    ser.write(f"I {direction}".encode("utf-8"))
+    ser.close()
 
 def speed(speed: int):
     print(f"Setting speed to {speed}")
-    # ser = serial.Serial('/dev/tty.usbmodem1101')
-    # print(ser.name) 
-    # ser.write(f"S {speed}".encode("utf-8"))
-    # ser.close()
+    ser = serial.Serial('/dev/tty.usbmodem1101')
+    print(ser.name) 
+    ser.write(f"S {speed}".encode("utf-8"))
+    ser.close()
