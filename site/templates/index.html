@@ -7,7 +7,7 @@
         <div>
             <input type="range"id="speed" orient="vertical" name="speed" min="0" max="100" value="0" style = "height:500px;width:200px;-webkit-appearance: slider-vertical"/>
             <!-- <input type="range" orient="vertical" id="speed" name="speed" min="0" max="100" value="0" height=5000px/> -->
-            <label for="speed">Speed</label>
+            <label id="speedLabel" for="speed">Speed: 0</label>
         </div>
         <button id="upButton">Up</button>
         <button id="downButton">Down</button>
@@ -15,9 +15,17 @@
             var app = {
                 initialize: function() {
                     // bind events
-                    upButton.addEventListener('click', this.up, false);
-                    downButton.addEventListener('click', this.down, false);
+                    upButton.addEventListener('mousedown', this.up, false);
+                    upButton.addEventListener('mouseup', this.inclineStop, true);
+                    downButton.addEventListener('mousedown', this.down, false);
+                    downButton.addEventListener('mouseup', this.inclineStop, true);
                     speed.addEventListener('change', this.setSpeed, false);
+                },
+                inclineStop: async function() {
+                    console.log("Stop Incline");
+                    const response = await fetch("/inclineStop");
+                    const text = await response.text();
+                    console.log(text);
                 },
                 up: async function() {
                     console.log("Up");
@@ -33,6 +41,7 @@
                 },
                 setSpeed: async function() {
                     console.log(`Set the speed to ${speed.value}`);
+                    document.getElementById('speedLabel').innerText = 'Speed: ' + speed.value;
                     const response = await fetch(`/speed/${speed.value}`);
                     const text = await response.text();
                     console.log(text);
