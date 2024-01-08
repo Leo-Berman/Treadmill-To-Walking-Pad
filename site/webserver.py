@@ -2,12 +2,18 @@ import serial
 from flask import Flask
 # from flask import url_for
 from flask import render_template
+from flask import send_from_directory
+
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
     return render_template('index.html')
+# @app.route("/<path:path>")
+# def svelte_client(path):
+#     return send_from_directory('../svelte/public/', path)
+
 
 @app.route('/speed/<int:value>')
 def speed(value):
