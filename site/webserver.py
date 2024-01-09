@@ -42,19 +42,19 @@ def speed(value):
 @app.route("/up")
 def up():
     print("Increasing incline")
-    # incline(2)
+    incline(2)
     return "Ok"
 
 @app.route("/down")
 def down():
     print("Decreasing incline")
-    # incline(1)
+    incline(1)
     return "Ok"
 
 @app.route("/inclineStop")
 def stop():
     print("Stopping incline")
-    # incline(3)
+    incline(3)
     return "Ok"
 
 def incline(direction: int):
