@@ -110,20 +110,20 @@ void run(int percent_power) {
   analogWrite(speed_pin, val); // Writes the voltage value to the arduino speed output pin using pwm
 }
 
-void timed_run(int seconds, int percent_power) {
-  int val = map(percent_power, 0, 100, 0, 255);// maps scale from 0 to 100 to full scale of arduino output (0 to 255)
+// void timed_run(int seconds, int percent_power) {
+//   int val = map(percent_power, 0, 100, 0, 255);// maps scale from 0 to 100 to full scale of arduino output (0 to 255)
   
-  // Get initial time stamp to compare
-  int start_time = millis(); 
-  int end_timeI = start_time;
-  int run_time = seconds*1000;
-  analogWrite(speed_pin, val);
-  while ((end_time - start_time) <=run_time) { // do this loop for up to 1000ms
-    end_time = millis();
-    Serial.println(end_time);
-  }
-  analogWrite(speed_pin, 0);
-}
+//   // Get initial time stamp to compare
+//   int start_time = millis(); 
+//   int end_timeI = start_time;
+//   int run_time = seconds*1000;
+//   analogWrite(speed_pin, val);
+//   while ((end_time - start_time) <=run_time) { // do this loop for up to 1000ms
+//     end_time = millis();
+//     Serial.println(end_time);
+//   }
+//   analogWrite(speed_pin, 0);
+// }
 
 void timed_run_ver2(int seconds, int percent_power) {
   int val = map(percent_power, 0, 100, 0, 255); // maps scale from 0 to 100 to full scale of arduino output (0 to 255)
