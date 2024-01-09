@@ -9,6 +9,15 @@ app = Flask(__name__)
             # static_url_path='/', 
             # static_folder='templates/my-app/build/',
             # template_folder='templates/my-app/build/')
+            
+ser = serial.Serial(
+        port='/dev/ttyACM0',
+        baudrate=9600,
+        parity=serial.PARITY_NONE,
+        stopbits=serial.STOPBITS_ONE,
+        bytesize=serial.EIGHTBITS,
+        timeout=0
+        )
 
 # @app.route("/")
 # def index():
@@ -50,14 +59,14 @@ def stop():
 
 def incline(direction: int):
     print(f"Setting incline to {direction}")
-    ser = serial.Serial('/dev/AMC0')
+    # ser = serial.Serial('/dev/AMC0')
     print(ser.name) 
     ser.write(f"I {direction}".encode("utf-8"))
-    ser.close()
+    # ser.close()
 
 def speed(speed: int):
     print(f"Setting speed to {speed}")
-    ser = serial.Serial('/dev/AMC0')
+    # ser = serial.Serial('/dev/AMC0')
     print(ser.name) 
     ser.write(f"S {speed}".encode("utf-8"))
-    ser.close()
+    # ser.close()
