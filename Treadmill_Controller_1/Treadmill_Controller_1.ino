@@ -1,4 +1,10 @@
-int speed = 0;
+/* Leo Berman and Liam Coleman
+leo.berman@temple.edu
+liam@megster.com
+1/8/2024
+*/
+/* Declare Global Variables*/
+int speed_pin = 9; // Output PWM pin that controls thte speed of the treadmill
 int output_pin = 9;
 int val = 0;
 int IN1 = 12;
@@ -81,15 +87,27 @@ void run(int percent_power) {
   analogWrite(output_pin, val);
 }
 
-void timed_run(int seconds, int percent_power) {
-  int val = map(percent_power, 0, 100, 0, 255);
-  int start_time = millis();
-  int end_timeI = start_time;
-  int run_time = seconds*1000;
-  analogWrite(output_pin, val);
-  while ((end_time - start_time) <=run_time) { // do this loop for up to 1000ms
-    end_time = millis();
-    Serial.println(end_time);
-  }
-  analogWrite(output_pin, 0);
+ void timed_run(int seconds, int percent_power) {
+   int val = map(percent_power, 0, 100, 0, 255);// maps scale from 0 to 100 to full scale of arduino output (0 to 255)
+  
+   // Get initial time stamp to compare
+   int start_time = millis(); 
+   int end_time = start_time;
+   int run_time = seconds*1000;
+   analogWrite(speed_pin, val);
+   while ((end_time - start_time) <=run_time) { // do this loop for up to 1000ms
+     end_time = millis();
+     Serial.println(end_time);
+   }
+   analogWrite(speed_pin, 0);
+ }
+
+void timed_run_ver2(int seconds, int percent_power) {
+  int val = map(percent_power, 0, 100, 0, 255); // maps scale from 0 to 100 to full scale of arduino output (0 to 255)
+    int start_time = millis();   // Get initial time stamp to compare
+  int run_time = seconds*1000; // number of time the loop should go for
+  int end_time = start_time+run_time; // calculate end_time
+  analogWrite(speed_pin, val); // Writes the voltage value to the arduino speed output pin using pwm
+  while (millis() < end_time); // Stay in loop until end_time is reached
+  analogWrite(speed_pin, 0); // set treadmill speed to 0
 }
