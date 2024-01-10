@@ -7,20 +7,29 @@
     <link rel="stylesheet" href="../static/styles.css"/> 
     <link href="../static/mystyles.css" type="text/css" rel="stylesheet">
     <body>
-        <div id = "slider" class = "parent">
-            <!--Speed slider input -->
-                <input class = "child" type="range"id="speed" name="speed" min="0" max="100" value="0"/>
-                <!-- <input type="range" orient="vertical" id="speed" name="speed" min="0" max="100" value="0" height=5000px/> -->
-                <label class = "child" id="speedLabel" for="speed">Speed: 0</label>
+        <div class = "row">
+            <!-- Buttons -->
+            <div class="column" style="width:50%;height:100%;" >
+                <div class = "table">
+                    <button type="button" class = "mybutton" id="upButton">Up</button> 
+                    <button type="button" class = "mybutton" id="downButton">Down</button> 
+                    <button type="button" class = "mybutton" id="stopButton">Stop</button>
+                </div>
+                <!--Up and down buttons-->
+                
+
             </div>
-    <div class="">
-        <div class="p-3" style="text-align: center;">
-                <div class="justify-content-center">
-                    <!--Up and down buttons-->
-                    <button type="button" class="btn btn-primary" id="upButton">Up</button>
-                    <button type="button" class="btn btn-primary" id="downButton">Down</button>
+            <!-- Speed Slider -->
+            <div class = "column">
+                
+                <div id = "slider" class = "parent" style="width:50%;height:100%;">
+                        <input class = "child" type="range"id="speed" name="speed" min="0" max="100" value="0"/>
+                        <label class = "child" id="speedLabel" for="speed">Speed: 0</label>
                 </div>
             </div>
+
+            
+        </div>
         <script>
 	    <!-- App object -->
             var app = {
@@ -33,7 +42,7 @@
 		            // When downButton pressed call app.down function
                     downButton.addEventListener('mousedown', this.down, false);
 		            // When downButton released call app.inclineStop function
-                    downButton.addEventListener('mouseup', this.inclineStop, true);
+                    stopButton.addEventListener('mouseup', this.inclineStop, true);
 		            // When speed changes call this.setSpeed function
                     speed.addEventListener('change', this.setSpeed, false);
                 },

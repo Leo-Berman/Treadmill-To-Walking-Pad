@@ -1,12 +1,8 @@
 /* Alters the div class for the slider aligns it to the center of the page with a relative position to the left and moves it down 40% of the page */
 #slider{
     position: absolute;
-    margin-top:400px;
     padding-left: 20px;
     padding-right: 200px;
-    margin-right: auto;
-    margin-left: 50%;
-    
 }    
 /* This alters the slider itself rotates it and specifies the length */
 #speed{
@@ -25,6 +21,7 @@
     display: grid;
     place-items: center;
 }
+
 /* This sets all input ranges to ignore standard webkit range appearances */
 input[type=range]{
     -webkit-appearance: none;
@@ -58,40 +55,28 @@ input[type=range]:focus {
 }
 
 /* Webkit for when you're hovering over the slider track */
-input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #ccc;
-}
 input[type=range]:hover::-webkit-slider-thumb {
     background: #085ed8;
 }
-/* Firefox  */
 
-/* Webkit for the track of the slider */
-input[type=range]::-moz-slider-runnable-track {
-    width: 300px;
-    height: 50px;
-    background: #ddd;
-    border: none;
-    border-radius: 3px;
-    margin-top:auto;
-    margin-bottom:auto;
+.column{
+    float: left;
+    width:50%;
+    height:100%;
+}
+.row{
+    height:100%;
 }
 
-/* Webkit for the thumb of the slider */
-input[type=range]::-moz-slider-thumb {
-    -moz-appearance: none;
-    border: none;
-    height: 180px;
-    width: 90px;
+.mybutton{
     border-radius: 6px;
     background: #0d6efd;
-    margin-top: -65px;
-
+    border:none;
+    margin-top:20px;   
+    height:290px;
+    width:100%;
+    font-size:40px;
 }
-/* Webkit for when you're hovering over the slider track */
-input[type=range]:focus::-moz-slider-runnable-track {
-    background: #ccc;
-}
-input[type=range]:hover::-moz-slider-thumb {
+.mybutton:hover{
     background: #085ed8;
 }
