@@ -79,7 +79,7 @@ input[type=range]::-moz-slider-runnable-track {
 
 /* Webkit for the thumb of the slider */
 input[type=range]::-moz-slider-thumb {
-    -webkit-appearance: none;
+    -moz-appearance: none;
     border: none;
     height: 180px;
     width: 90px;
