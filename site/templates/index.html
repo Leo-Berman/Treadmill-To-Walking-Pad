@@ -7,23 +7,19 @@
     <link rel="stylesheet" href="../static/styles.css"/> 
     <link href="mystyles.css" type="text/css" rel="stylesheet">
     <body>
-    <div class="">
-        <div class="p-3" style="text-align: center;"">
+        <div id = "slider" class = "parent">
             <!--Speed slider input -->
-            <div id = "slider" class = "parent">
-                <!--Speed slider input -->
-                    <input class = "child" type="range"id="speed" name="speed" min="0" max="100" value="0"/>
-                    <!-- <input type="range" orient="vertical" id="speed" name="speed" min="0" max="100" value="0" height=5000px/> -->
-                    <label class = "child" id="speedLabel" for="speed">Speed: 0</label>
-                </div>
+                <input class = "child" type="range"id="speed" name="speed" min="0" max="100" value="0"/>
+                <!-- <input type="range" orient="vertical" id="speed" name="speed" min="0" max="100" value="0" height=5000px/> -->
+                <label class = "child" id="speedLabel" for="speed">Speed: 0</label>
+            </div>
+        <div class="p-3" style="text-align: center;">
                 <div class="justify-content-center">
-                    <p class="" id="speedLabel" for="speed">Speed: 0</p>
                     <!--Up and down buttons-->
                     <button type="button" class="btn btn-primary" id="upButton">Up</button>
                     <button type="button" class="btn btn-primary" id="downButton">Down</button>
                 </div>
             </div>
-    </div>
         <script>
 	    <!-- App object -->
             var app = {
