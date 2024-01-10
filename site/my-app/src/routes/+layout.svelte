@@ -8,6 +8,6 @@ let btnClass = 'text-primary-500 dark:text-primary-600 border dark:border-gray-8
 <DarkMode {btnClass}/>
 <!-- <DarkMode class="text-primary-500 dark:text-primary-600 border dark:border-gray-800"></DarkMode> -->
 <slot class="m-2"></slot>
-<Footer class="m-2">
+<Footer class="m-2 flex justify-center text-justify">
     <FooterCopyright href="https://github.com/Leo-Berman/Treadmill-To-Walking-Pad/" by="Liam Coleman and Leo Berman" year={2024} />
 </Footer>
