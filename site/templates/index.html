@@ -5,48 +5,76 @@
     </head>
     <body>
         <div>
+	    <!--Speed slider input -->
             <input type="range"id="speed" orient="vertical" name="speed" min="0" max="100" value="0" style = "height:500px;width:200px;-webkit-appearance: slider-vertical"/>
             <!-- <input type="range" orient="vertical" id="speed" name="speed" min="0" max="100" value="0" height=5000px/> -->
             <label id="speedLabel" for="speed">Speed: 0</label>
         </div>
+	<!--Up and down buttons-->
         <button id="upButton">Up</button>
         <button id="downButton">Down</button>
         <script>
+	    <!-- App object -->
             var app = {
                 initialize: function() {
                     // bind events
+		    // When upButton pressed call app.up function
                     upButton.addEventListener('mousedown', this.up, false);
+		    // When upButton released call app.inclineStop function 
                     upButton.addEventListener('mouseup', this.inclineStop, true);
+		    // When downButton pressed call app.down function
                     downButton.addEventListener('mousedown', this.down, false);
+		    // When downButton released call app.inclineStop function
                     downButton.addEventListener('mouseup', this.inclineStop, true);
+		    // When speed changes call this.setSpeed function
                     speed.addEventListener('change', this.setSpeed, false);
                 },
+		
                 inclineStop: async function() {
-                    console.log("Stop Incline");
+                    // Print to the website console
+		    console.log("Stop Incline");
+		    // This calls the api which tells python to fetch stop, up or down value from the respective endpoint
                     const response = await fetch("/inclineStop");
-                    const text = await response.text();
-                    console.log(text);
+                    // This grabs the response from the api to confirm if the signal is received
+		    const text = await response.text();
+                    // Print the response to the website console
+		    console.log(text);
                 },
                 up: async function() {
+		    // Print to the website console
                     console.log("Up");
+		    // This calls the api wihch tells python to get stop, up or down value from the respective enedpoint
                     const response = await fetch("/up");
-                    const text = await response.text();
+                    // This grabs the response from the api to confirm if the signal is received
+		    const text = await response.text();
+		    // Print the response to the website console
                     console.log(text);
                 },
                 down: async function() {
+		    // Print to the website console
                     console.log("Down");
+		    // This calls the api which tells python to get stop, up or down value from the respective endpoint
                     const response = await fetch("/down");
+		    // This grabs the response from the api to confirm if the signal is received
                     const text = await response.text();
+		    // Print the response to the website console
                     console.log(text);
                 },
+
                 setSpeed: async function() {
+		    // Print the speed to the website console
                     console.log(`Set the speed to ${speed.value}`);
+		    // This calls the api which tells python to get the speed value from the respective endpoint
                     document.getElementById('speedLabel').innerText = 'Speed: ' + speed.value;
+		    // This grabs the response from the api to confirm if the signal is received in the form of an object
                     const response = await fetch(`/speed/${speed.value}`);
+		    // Calls the getter for the text aspect of the object
                     const text = await response.text();
+		    // Prints the text to the website console
                     console.log(text);
                 }
             }
+ 	    // Initializes the app object
             app.initialize();
         </script>
     </body>
