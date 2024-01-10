@@ -1,0 +1,61 @@
+/* Alters the div class for the slider aligns it to the center of the page with a relative position to the left and moves it down 40% of the page */
+#slider{
+    vertical-align: center;
+    position: relative;
+    top: 40%;
+}    
+/* This alters the slider itself rotates it and specifies the length */
+#speed{
+    width:30%;
+    transform: rotate(270deg);
+}
+/* This changes the position of the slider label and gives it a font size */
+#speedlabel{
+    font-size: 80px;
+    position: relative;
+    top: 300px;
+}
+/* This alters the parent class to place children inside of parent in center */
+.parent{
+    display: grid;
+    place-items: center;
+}
+/* This sets all input ranges to ignore standard webkit range appearances */
+input[type=range]{
+    -webkit-appearance: none;
+}
+
+/* Webkit for the track of the slider */
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 50px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+/* Webkit for the thumb of the slider */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 180px;
+    width: 90px;
+    border-radius: 6px;
+    background: #0d6efd;
+    margin-top: -65px;
+
+}
+/* Webkit for when you're hovering over the slider */
+input[type=range]:focus {
+    outline: none;
+}
+
+/* Webkit for when you're hovering over the slider track */
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+input[type=range]:hover::-webkit-slider-thumb {
+    background: #085ed8;
+}
