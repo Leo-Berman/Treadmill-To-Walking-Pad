@@ -42,8 +42,9 @@ setSpeed = async function() {
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Treadmill Controlls</h5>
     <div>
       <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Up: Increases the treadmill incline.</p>
-      <!-- <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Down: Decreases the treadmill incline.</p> -->
-      <!-- <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Speed: Controlls how fast the treadmill is.</p> -->
+      <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Down: Decreases the treadmill incline.</p>
+      <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Stop: Stops the incline motor.</p>
+      <p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">Speed: Controlls how fast the treadmill is.</p>
     </div>
   </Card>  
 </div>
@@ -52,8 +53,8 @@ setSpeed = async function() {
     <span class="font-medium">Info alert!</span>
     Change a few things up and try submitting again.
   </Alert> -->
-  <div class="m-10">
+  <div class="m-10 w-96">
     <Label class="mt-3">Speed: {minmaxValue}</Label>
-    <Range class="w-96" on:change={setSpeed} id="range-minmax" min="0" max="100" bind:value={minmaxValue}/>
+    <Range size="md" on:change={setSpeed} id="range-minmax" min="0" max="100" bind:value={minmaxValue}/>
   </div>
 </div>
