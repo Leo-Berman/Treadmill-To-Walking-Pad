@@ -15,13 +15,13 @@ void setup() {
   pinMode(output_pin, OUTPUT);
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
-  Serial.begin(9600);    //start serial communication @9600 bps
+  Serial.begin(9600); //start serial communication @9600 bps
   off();
   }
 
 void loop(){
   
-  if(Serial.available()){  //id data is available to read
+  if(Serial.available()){ //id data is available to read
     Serial.println("Serial Available");
     String input_command = Serial.readString();
     String parses[2];
@@ -88,7 +88,7 @@ void run(int percent_power) {
 }
 
  void timed_run(int seconds, int percent_power) {
-   int val = map(percent_power, 0, 100, 0, 255);// maps scale from 0 to 100 to full scale of arduino output (0 to 255)
+   int val = map(percent_power, 0, 100, 0, 255); // maps scale from 0 to 100 to full scale of arduino output (0 to 255)
   
    // Get initial time stamp to compare
    int start_time = millis(); 
