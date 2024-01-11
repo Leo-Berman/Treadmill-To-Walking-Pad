@@ -42,9 +42,28 @@
 		            // When downButton pressed call app.down function
                     downButton.addEventListener('mousedown', this.down, false);
 		            // When downButton released call app.inclineStop function
+                    downButton.addEventListener('mouseup', this.inclineStop, true);
+                    // When downButton released call app.inclineStop function
                     stopButton.addEventListener('mouseup', this.inclineStop, true);
 		            // When speed changes call this.setSpeed function
                     speed.addEventListener('change', this.setSpeed, false);
+                    
+                    //Input on mobile
+                    //bind events
+                    
+		            //When upButton pressed call app.up function
+                    upButton.addEventListener('touchstart', this.up, false);
+		            //When upButton released call app.inclineStop function 
+                    upButton.addEventListener('touchend', this.inclineStop, true);
+		            //When downButton pressed call app.down function
+                    downButton.addEventListener('touchstart', this.down, false);
+		            //When downButton released call app.inclineStop function
+                    downButton.addEventListener('touchend', this.inclineStop, true);
+                    //When stopButton released call app.inclineStop function
+                    stopButton.addEventListener('touchend', this.inclineStop, true);
+                    // When speed changes call this.setSPeed function
+                    speed.addEventListener('touchmove',this.setSpeed, false);
+
                 },
 		
                 inclineStop: async function() {
