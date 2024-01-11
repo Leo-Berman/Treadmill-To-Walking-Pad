@@ -102,4 +102,3 @@ def set_speed(speed: int):
     ser.write(f"S {speed}\n".encode("utf-8"))
     # Prints what it just wrote to serial to the local console
     print(f"S {speed}\n".encode("utf-8"))
-ser.close()
