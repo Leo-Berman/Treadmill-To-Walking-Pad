@@ -9,12 +9,14 @@
     position: absolute;
     width:600px;
     transform: rotate(270deg);
+    margin-top:-200px;
 }
 /* This changes the position of the slider label and gives it a font size */
 #speedLabel{
     font-size: 40px;
     position: absolute;
-    margin-top: 800px;
+    margin-top: 450px;
+    user-select: none;
 }
 /* This alters the parent class to place children inside of parent in center */
 .parent{
@@ -72,10 +74,19 @@ input[type=range]:hover::-webkit-slider-thumb {
     border-radius: 6px;
     background: #0d6efd;
     border:none;
-    margin-top:20px;   
+    /* margin-top:20px;    */
     height:290px;
-    width:100%;
+    width:70%;
     font-size:40px;
+    user-select: none;
+    text-align:center;
+    margin: 0;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    margin-top:200px;
 }
 .mybutton:hover{
     background: #085ed8;
