@@ -26,14 +26,14 @@ ser = serial.Serial(
 def index():
      return render_template('index.html')
 
-#@app.route("/")
-#def base():
-#    return send_from_directory('my-app/build', 'index.html')
+@app.route("/fancy")
+def base():
+    return send_from_directory('my-app/build', 'index.html')
 
 # Path for all the static files (compiled JS/CSS, etc.)
-#@app.route("/<path:path>")
-#def home(path):
-#    return send_from_directory('my-app/build', path)
+@app.route("/<path:path>")
+def home(path):
+    return send_from_directory('my-app/build', path)
 
 # Generate endpoint for speed
 @app.route('/speed/<int:value>')
