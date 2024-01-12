@@ -8,8 +8,8 @@
     <body style="overflow:hidden;">
         <div class="grid-container">
             <div class = "grid-item" >
-                <button type="button" style = "margin-top:5vh;width: 80%;height:40%;" class = "mybutton" id="upButton">Up</button>
-                <button type="button" style = "margin-top:5vh;width: 80%;height:40%;" class = "mybutton" id="downButton">down</button>
+                <button type="button" style = "margin-top:5vh;width: 100%;height:40%;" class = "mybutton" id="upButton">Up</button>
+                <button type="button" style = "margin-top:5vh;width: 100%;height:40%;" class = "mybutton" id="downButton">down</button>
             </div>  
             
             <div class = "grid-item" style = "padding-top:5vh;" >
@@ -38,7 +38,7 @@
 		            // When downButton released call app.inclineStop function
                     downButton.addEventListener('mouseup', this.inclineStop, true);
                     // When downButton released call app.inclineStop function
-                    stopButton.addEventListener('mouseup', this.inclineStop, true);
+                    stopButton.addEventListener('mousedown', this.setSpeedZero, true);
 		            // When speed changes call this.setSpeed function
                     speed.addEventListener('change', this.setSpeed, false);
                     
@@ -50,13 +50,11 @@
 		            //When upButton released call app.inclineStop function 
                     upButton.addEventListener('touchend', this.inclineStop, true);
 		            //When downButton pressed call app.down function
-                    downButton.addEventListener('touchstart',this.down,false);
+                    downButton.addEventListener('touchstart', this.down,false);
 		            //When downButton released call app.inclineStop function
                     downButton.addEventListener('touchend', this.inclineStop, true);
                     //When stopButton released call app.inclineStop function
-                    stopButton.addEventListener('touchend', this.inclineStop, true);
-                    // When speed changes call this.setSPeed function
-                    speed.addEventListener('touchmove',this.setSpeed, false);
+                    stopButton.addEventListener('touchstart', this.setSpeedZero, true);
 
                 },
 		
@@ -98,6 +96,18 @@
                     document.getElementById('speedLabel').innerText = 'Speed: ' + speed.value;
 		            // This grabs the response from the api to confirm if the signal is received in the form of an object
                     const response = await fetch(`/speed/${speed.value}`);
+		            // Calls the getter for the text aspect of the object
+                    const text = await response.text();
+		            // Prints the text to the website console
+                    console.log(text);
+                },
+                setSpeedZero: async function() {
+		            // Print the speed to the website console
+                    console.log(`Set the speed to 0`);
+		            // This calls the api which tells python to get the speed value from the respective endpoint
+                    document.getElementById('speedLabel').innerText = 'Speed: 0';
+		            // This grabs the response from the api to confirm if the signal is received in the form of an object
+                    const response = await fetch(`/speed/0`);
 		            // Calls the getter for the text aspect of the object
                     const text = await response.text();
 		            // Prints the text to the website console
