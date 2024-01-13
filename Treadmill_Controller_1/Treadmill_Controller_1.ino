@@ -49,8 +49,8 @@ void loop(){
     // Checks if incoming statement is speed(S) or incline(I) related
     if (input_command <= 100 && input_command >= 0){
       run(input_command);
+    else if (input_command >= 101 && input_command<=103){
     }
-    else if (input_command > 101 && input_command<=104){
       change_incline(input_command-100); 
     }
     else {
@@ -63,10 +63,10 @@ void loop(){
 // Incline logic  to select wich gates should be open
 void change_incline(int input){
   if (input == 1){
-    enable_k1();
+    incline_up();
   }
   else if (input == 2){
-    enable_k2();
+    incline_down();
   }
   else if (input ==3){
     off();
@@ -74,12 +74,12 @@ void change_incline(int input){
 }
 
 // Disable gate 2 and enable gate 1
-void enable_k1(){
+void incline_up(){
   digitalWrite(IN1,LOW);
 }
 
 // Enable gates 1 and 2
-void enable_k2(){
+void incline_down(){
   
   digitalWrite(IN1,HIGH);
   digitalWrite(IN2,LOW);
