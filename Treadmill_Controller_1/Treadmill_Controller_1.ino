@@ -48,9 +48,9 @@ void loop(){
 
     // Checks if incoming statement is speed(S) or incline(I) related
     if (input_command <= 100 && input_command >= 0){
-    run(input_command);
+      run(input_command);
     }
-    else if (input_command > 100 && input_command<=103){
+    else if (input_command > 101 && input_command<=104){
       change_incline(input_command-100); 
     }
     else {

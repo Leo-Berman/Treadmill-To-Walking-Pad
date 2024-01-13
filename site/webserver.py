@@ -86,7 +86,7 @@ def incline(direction: int):
     # Writes I {direction} to serial
     # ser.write(f"I {direction}\n".encode("utf-8"))
     # Prints what it just wrote to serial to the local console
-    print(f"{100 + direction}\n".encode("utf-8"))
+    print(f"{100 + direction}".encode("utf-8"))
     # ser.close()
 
 def set_speed(speed: int):
@@ -99,5 +99,5 @@ def set_speed(speed: int):
     # Writes S {speed} to serial
     # ser.write(f"S {speed}\n".encode("utf-8"))
     # Prints what it just wrote to serial to the local console
-    print(f"{speed}\n".encode("utf-8"))
+    print(f"{speed}".encode("utf-8"))
 # ser.close()
