@@ -1,0 +1,91 @@
+/* Alters the div class for the slider aligns it to the center of the page with a relative position to the left and moves it down 40% of the page */
+/* This alters the slider itself rotates it and specifies the length */
+#speed{
+    writing-mode: vertical-lr;
+    width:50vw;
+    height: 70vh;
+    /* padding: 0 5px; */
+    padding-right:45px;
+    background-color:#085fd800;
+    /* Use flexbox for slider wrapper element */
+    display:flex;
+    /* Direct alignment of content along horizontal axis */
+    flex-direction:row;
+    /* Tell's flexbox to center content around the non-horizontal axis (ie around the vertical axis) */
+    align-items:center;
+}
+/* This changes the position of the slider label and gives it a font size */
+#speedLabel{
+    font-size: 30px;
+    user-select: none;
+    text-align:center;
+}
+
+/* This sets all input ranges to ignore standard webkit range appearances */
+input[type=range]{
+    -webkit-appearance: none;
+}
+
+/* Webkit for the track of the slider */
+input[type=range]::-webkit-slider-runnable-track {
+    width: 2.777777777vw;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+/* Webkit for the thumb of the slider */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 6.52173913vh;
+    width: 16.66666666vw;
+    border-radius: 6px;
+    background: #0d6efd;
+    margin-left: -6.9444444vw; 
+
+}
+/* Webkit for when you're hovering over the slider */
+input[type=range]:focus {
+    outline: none;
+}
+
+/* Webkit for when you're hovering over the slider track */
+input[type=range]:hover::-webkit-slider-thumb {
+    background: #085ed8;
+}
+
+.column{
+    width:50%;
+}
+.row{
+    height:100%;
+}
+
+.mybutton{
+    border-radius: 6px;
+    background: #0d6efd;
+    border:none;
+    user-select: none;
+    text-align:center;
+    font-size:30px;
+}
+.mybutton:hover{
+    background: #085ed8;
+}
+
+.grid-container{
+    display:grid;
+    grid-template-columns: auto auto auto;
+    width: 100vw;
+    height: 100vh;
+}
+
+.grid-item {
+    padding: 20px;
+    text-align: center;
+    width: 50vw;
+    height: 100vh;
+  }

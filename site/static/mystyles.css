@@ -1,0 +1,93 @@
+/* Alters the div class for the slider aligns it to the center of the page with a relative position to the left and moves it down 40% of the page */
+#slider{
+    position: absolute;
+    padding-left: 20px;
+    padding-right: 200px;
+}    
+/* This alters the slider itself rotates it and specifies the length */
+#speed{
+    position: absolute;
+    width:600px;
+    transform: rotate(270deg);
+    margin-top:-200px;
+}
+/* This changes the position of the slider label and gives it a font size */
+#speedLabel{
+    font-size: 40px;
+    position: absolute;
+    margin-top: 450px;
+    user-select: none;
+}
+/* This alters the parent class to place children inside of parent in center */
+.parent{
+    display: grid;
+    place-items: center;
+}
+
+/* This sets all input ranges to ignore standard webkit range appearances */
+input[type=range]{
+    -webkit-appearance: none;
+}
+
+/* Webkit for the track of the slider */
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 50px;
+    background: #dddddd00;
+    border: none;
+    border-radius: 3px;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+/* Webkit for the thumb of the slider */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 180px;
+    width: 90px;
+    border-radius: 6px;
+    background: #0d6efd;
+    margin-top: -65px;
+
+}
+/* Webkit for when you're hovering over the slider */
+input[type=range]:focus {
+    outline: none;
+}
+
+/* Webkit for when you're hovering over the slider track */
+input[type=range]:hover::-webkit-slider-thumb {
+    background: #085ed8;
+}
+
+.column{
+    float: left;
+    width:50%;
+    height:100%;
+}
+.row{
+    height:100%;
+}
+
+.mybutton{
+    border-radius: 6px;
+    background: #0d6efd;
+    border:none;
+    /* margin-top:20px;    */
+    height:290px;
+    width:70%;
+    font-size:40px;
+    user-select: none;
+    text-align:center;
+    margin: 0;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    margin-top:200px;
+}
+.mybutton:hover{
+    background: #085ed8;
+}
