@@ -88,19 +88,20 @@ void change_incline(int input){
 
 // Disable gate 2 and enable gate 1
 void enable_k1(){
-  digitalWrite(IN1,HIGH);
+  digitalWrite(IN1,LOW);
 }
 
 // Enable gates 1 and 2
 void enable_k2(){
-  digitalWrite(IN1,LOW);
-  digitalWrite(IN2,HIGH);
+  
+  digitalWrite(IN1,HIGH);
+  digitalWrite(IN2,LOW);
 }
 
 // Disable gates 1 and 2
 void off(){
-  digitalWrite(IN1,LOW);
-  digitalWrite(IN2,LOW);
+  digitalWrite(IN1,HIGH);
+  digitalWrite(IN2,HIGH);
 }
 
 // controls treadmill speed

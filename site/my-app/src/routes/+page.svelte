@@ -1,5 +1,6 @@
 <script>
-import { Alert, Button, Range, Label} from 'flowbite-svelte';
+import { Alert, Button, Range, Label, Card, Toast} from 'flowbite-svelte';
+import { FireOutline } from 'flowbite-svelte-icons';
 //   import { ThumbsUpSolid, ThumbsDownSolid } from 'flowbite-svelte-icons';
 let minmaxValue = 0;
 
@@ -32,16 +33,37 @@ setSpeed = async function() {
     console.log(text);
 }
 </script>
-
-<div class="p-8">
-  <!-- <Alert>
-    <span class="font-medium">Info alert!</span>
-    Change a few things up and try submitting again.
-  </Alert> -->
-  <div class="pb-2">
-    <Button on:click={up}>Up</Button>
-    <Button on:click={down}>Down</Button>
+<div class="mb-100">
+  <div class="m-3 flex flex-row justify-center items-center text-center">
+    <Card class="items-center">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Treadmill Controlls</h5>
+      <div>
+        <p class="justify-start text-justify font-normal text-gray-700 dark:text-gray-400 leading-tight word-wrap: break-word;">Up: Increases the treadmill incline.</p>
+        <p class="justify-start text-justify font-normal text-gray-700 dark:text-gray-400 leading-tight word-wrap: break-word;">Down: Decreases the treadmill incline.</p>
+        <p class="justify-start text-justify font-normal text-gray-700 dark:text-gray-400 leading-tight word-wrap: break-word;">Stop: Stop the incline motor.</p>
+        <p class="justify-start text-justify font-normal text-gray-700 dark:text-gray-400 leading-tight word-wrap: break-word;">Speed: Speed of the treadmill belt.</p>
+      </div>
+    </Card>
   </div>
-  <Label>Speed: {minmaxValue}</Label>
-  <Range on:change={setSpeed} id="range-minmax" min="0" max="100" bind:value={minmaxValue} style=""/>
+  <div class="m-3 flex flex-row justify-center items-center text-center">
+    <Toast>
+      <FireOutline slot="icon" class="w-5 h-5 text-primary-500 bg-primary-100 dark:bg-primary-800 dark:text-primary-200" />
+      WELCOME
+    </Toast>
+  </div>
+  <div class="m-3 flex flex-row justify-center items-center text-center" style="">
+    <!-- <Alert>
+      <span class="font-medium">Info alert!</span>
+      Change a few things up and try submitting again.
+    </Alert> -->
+    <div class="me-5 flex flex-col">
+      <Button class="mb-3" on:click={up} on:mouseenter={up}>Up</Button>
+      <Button class="mb-3" on:click={down}>Down</Button>
+      <Button on:click={inclineStop}>Stop</Button>
+    </div>
+    <div class="m-5 w-96">
+      <Label class="mt-3">Speed: {minmaxValue}</Label>
+      <Range class="rotate-0" size="md" on:change={setSpeed} id="range-minmax" min="0" max="100" bind:value={minmaxValue}/>
+    </div>
+  </div>
 </div>

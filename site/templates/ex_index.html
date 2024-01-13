@@ -4,27 +4,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Treadmill Controller</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">   
-    <link rel="stylesheet" type="text/css" href="../static/styles.css"/> 
+    <link rel="stylesheet" href="../static/styles.css"/> 
+    <link href="../static/mystyles.css" type="text/css" rel="stylesheet">
     <body style="overflow:hidden;">
-        <div class="grid-container">
-            <div class = "grid-item" >
-                <button type="button" style = "margin-top:5vh;width: 100%;height:40%;" class = "mybutton" id="upButton">Up</button>
-                <button type="button" style = "margin-top:5vh;width: 100%;height:40%;" class = "mybutton" id="downButton">down</button>
-            </div>  
-            
-            <div class = "grid-item" style = "padding-top:5vh;" >
-                <div>
-                    <input type="range" id="speed" name="speed" min="0" max="100" value="0"></input>
-                </div>
-                <div>
-                    <label id="speedLabel" for="speed">Speed: 0</label>
-                </div>
-                <div>
-                    <button type="button" style="width:20vw;height:10vh" class = "mybutton" id="stopButton">Stop</button>
+        <div class = "row">
+            <!-- Buttons -->
+            <div class="column" style="width:50%;height:100%;" >
+                    <button type="button" class = "mybutton" id="upButton">Up</button>
+                    <button type="button" class = "mybutton" id="downButton">Down</button>
+                <!--Up and down buttons-->
+                
+
+            </div>
+            <!-- Speed Slider -->
+            <div class = "column">
+                <div class = "table">
+                    <div id = "slider" class = "parent" style="width:50%;height:100%;">
+                            <input class = "child" type="range"id="speed" name="speed" min="0" max="100" value="0"/>
+                            <label class = "child" id="speedLabel" for="speed">Speed: 0</label>
+                            <button type="button" class = "mybutton" id="stopButton" style="height:100px;margin-top:-200px;">Stop</button>
+                    
+                    </div>
                 </div>
             </div>
+
+            
         </div>
-    <script>
+        <script>
 	    <!-- App object -->
             var app = {
                 initialize: function() {
@@ -38,7 +44,7 @@
 		            // When downButton released call app.inclineStop function
                     downButton.addEventListener('mouseup', this.inclineStop, true);
                     // When downButton released call app.inclineStop function
-                    stopButton.addEventListener('mousedown', this.setSpeedZero, true);
+                    stopButton.addEventListener('mouseup', this.inclineStop, true);
 		            // When speed changes call this.setSpeed function
                     speed.addEventListener('change', this.setSpeed, false);
                     
@@ -50,11 +56,13 @@
 		            //When upButton released call app.inclineStop function 
                     upButton.addEventListener('touchend', this.inclineStop, true);
 		            //When downButton pressed call app.down function
-                    downButton.addEventListener('touchstart', this.down,false);
+                    downButton.addEventListener('touchstart',this.down,false);
 		            //When downButton released call app.inclineStop function
                     downButton.addEventListener('touchend', this.inclineStop, true);
                     //When stopButton released call app.inclineStop function
-                    stopButton.addEventListener('touchstart', this.setSpeedZero, true);
+                    stopButton.addEventListener('touchend', this.inclineStop, true);
+                    // When speed changes call this.setSPeed function
+                    speed.addEventListener('touchmove',this.setSpeed, false);
 
                 },
 		
@@ -96,18 +104,6 @@
                     document.getElementById('speedLabel').innerText = 'Speed: ' + speed.value;
 		            // This grabs the response from the api to confirm if the signal is received in the form of an object
                     const response = await fetch(`/speed/${speed.value}`);
-		            // Calls the getter for the text aspect of the object
-                    const text = await response.text();
-		            // Prints the text to the website console
-                    console.log(text);
-                },
-                setSpeedZero: async function() {
-		            // Print the speed to the website console
-                    console.log(`Set the speed to 0`);
-		            // This calls the api which tells python to get the speed value from the respective endpoint
-                    document.getElementById('speedLabel').innerText = 'Speed: 0';
-		            // This grabs the response from the api to confirm if the signal is received in the form of an object
-                    const response = await fetch(`/speed/0`);
 		            // Calls the getter for the text aspect of the object
                     const text = await response.text();
 		            // Prints the text to the website console
