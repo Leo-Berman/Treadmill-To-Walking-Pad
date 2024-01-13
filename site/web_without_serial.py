@@ -80,7 +80,7 @@ def stop():
 def incline(direction: int):
     
     # prints to the local console
-    print(f"Setting incline to {direction}")
+    print(f"Setting incline to {100+direction}")
     # ser = serial.Serial('/dev/AMC0')
     
     # Prints the name of the physical port
@@ -88,7 +88,7 @@ def incline(direction: int):
     # Writes I {direction} to serial
     # ser.write(f"I {direction}\n".encode("utf-8"))
     # Prints what it just wrote to serial to the local console
-    print(f"I {direction}\n".encode("utf-8"))
+    print(f"{100 + direction}\n".encode("utf-8"))
     # ser.close()
 
 def set_speed(speed: int):
@@ -101,5 +101,5 @@ def set_speed(speed: int):
     # Writes S {speed} to serial
     # ser.write(f"S {speed}\n".encode("utf-8"))
     # Prints what it just wrote to serial to the local console
-    print(f"S {speed}\n".encode("utf-8"))
+    print(f"{speed}\n".encode("utf-8"))
 # ser.close()

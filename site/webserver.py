@@ -21,19 +21,17 @@ ser = serial.Serial(
         bytesize=serial.EIGHTBITS,
         timeout=0
         )
-# serving index.html to the main website endpoint
 @app.route("/")
 def index():
-     return render_template('index.html')
-
+    return render_template('index.html')
 @app.route("/fancy")
 def base():
-    return send_from_directory('my-app/build', 'index.html')
+   return send_from_directory('my-app/build', 'index.html')
 
 # Path for all the static files (compiled JS/CSS, etc.)
 @app.route("/<path:path>")
 def home(path):
-    return send_from_directory('my-app/build', path)
+   return send_from_directory('my-app/build', path)
 
 # Generate endpoint for speed
 @app.route('/speed/<int:value>')
@@ -80,15 +78,15 @@ def stop():
 def incline(direction: int):
     
     # prints to the local console
-    print(f"Setting incline to {direction}")
+    print(f"Setting incline to {100+direction}")
     # ser = serial.Serial('/dev/AMC0')
     
     # Prints the name of the physical port
-    print(ser.name) 
+    # print(ser.name) 
     # Writes I {direction} to serial
-    ser.write(f"I {direction}\n".encode("utf-8"))
+    # ser.write(f"I {direction}\n".encode("utf-8"))
     # Prints what it just wrote to serial to the local console
-    print(f"I {direction}\n".encode("utf-8"))
+    print(f"{100 + direction}\n".encode("utf-8"))
     # ser.close()
 
 def set_speed(speed: int):
@@ -97,8 +95,9 @@ def set_speed(speed: int):
     # ser = serial.Serial('/dev/AMC0')
     
     # prints the name of the physical port
-    print(ser.name) 
+    # print(ser.name) 
     # Writes S {speed} to serial
-    ser.write(f"S {speed}\n".encode("utf-8"))
+    # ser.write(f"S {speed}\n".encode("utf-8"))
     # Prints what it just wrote to serial to the local console
-    print(f"S {speed}\n".encode("utf-8"))
+    print(f"{speed}\n".encode("utf-8"))
+# ser.close()

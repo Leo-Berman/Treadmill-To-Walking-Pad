@@ -34,11 +34,8 @@ void loop(){
     //Serial.println("Serial Available"); // Debug
     
     // Parsing serial input
-    String input_command = Serial.readString();
-    String parses[2];
-    int index = input_command.indexOf(' ');
-    parses[0] = input_command.substring(0,index);
-    parses[1] = (input_command.substring(index+1));
+    int input_command = Serial.parseInt();
+    
     
     /* Debugging
     Serial.println(parses[0]);
@@ -50,24 +47,14 @@ void loop(){
     */
 
     // Checks if incoming statement is speed(S) or incline(I) related
-    if (parses[0] == String("S")){
-      
-      run(parses[1].toInt()); // set treadmill speed
-      
-      /* Debugging
-      Serial.println("In S");
-      Serial.print("Speed changed to ");
-      Serial.println(parses[1].toInt());
-      */
+    if (input_command <= 100 && input_command >= 0){
+    run(input_command);
     }
-    else if (parses[0] == String("I")){
-      
-      change_incline(parses[1].toInt()); // Set incline to up or down
-
-      //Serial.println(parses[1].toInt()); // Debugging
+    else if (input_command > 100 && input_command<=103){
+      change_incline(input_command-100); 
     }
     else {
-      Serial.println("In Else"); // Debugging
+      //Serial.println("In Else"); // Debugging
       run(0); // Stops the treadmill in case of extraneous case
     }
   }
