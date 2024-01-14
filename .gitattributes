@@ -1,3 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 Final_Paper/Treadmill-To-Walking-Desk_Final_Paper/* linguist-vendored
+jquery.js linguist-vendored=false
