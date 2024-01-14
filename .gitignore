@@ -1,3 +1,9 @@
 venv
 __pycache__
 .DS_Store
+*.fdb_latexmk
+*.xml
+*.pdf
+*.fls
+*.bcf
+*.pyg
