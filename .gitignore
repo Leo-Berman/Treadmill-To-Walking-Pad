@@ -1,9 +1,4 @@
 venv
 __pycache__
 .DS_Store
-*.fdb_latexmk
-*.xml
-*.pdf
-*.fls
-*.bcf
-*.pyg
+Final_Paper/Treadmill-To-Walking-Desk_Final_Paper/*.tex
