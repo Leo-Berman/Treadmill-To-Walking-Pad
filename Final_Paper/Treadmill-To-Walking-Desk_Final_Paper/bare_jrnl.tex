@@ -1,0 +1,344 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[justification=centering]{caption}
+\usepackage{float}
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+% For url linking
+\usepackage{url}
+\newcommand{\MYhref}[3][blue]{\href{#2}{\color{#1}{#3}}}%
+
+% side by side figures
+\usepackage{subfigure}
+
+% Package for bolding
+\usepackage{amsmath}
+
+% Packages For Code Blocks
+\input{arduinoLanguage.tex}
+\usepackage{listings}
+\usepackage{color}
+
+
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\begin{document}
+\begin{title}{Building a Website Controlled Low Profile Walking Pad From an Old Treadmill\\
+    \begin{center}    
+        {\large January 2024}
+    \end{center}}
+\end{title}
+
+\maketitle
+
+% Authors
+\begin{center}
+Leo Berman\\
+Temple University\\
+Leo.Berman@temple.edu\\
+{\bigskip}
+Liam Coleman\\
+Rochester Institute of Technology\\
+RIT\\
+Liam@megster.com\\
+\end{center}
+\begin{abstract}
+This paper presents a step-by-step guide on how we converted the Proform XL Crosswalk treadmill into a Low Profile Walking Pad controlled by a website interface. Initially, we performed a diagnostic assessment of the main dashboard and determined how it communicates with the treadmill motor controllers. Next, we built an Arduino control system that receives commands via serial input. Finally, we designed a website to control the RaspberryPi with a seamless UX.
+\end{abstract}
+\IEEEpeerreviewmaketitle
+
+\section{Procedure}
+\begin{enumerate}
+\item Open up the control panel to examine the electronics. {\bfseries !!!WARNING!!!} In our version of the treadmill the incline control and emergency stop were hooked up directly to 110 volts of AC so be very careful and unplug the machine while working.
+    \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\linewidth]{Treadmill_Control_Panel.png}
+            \caption{Treadmill Control Panel}
+            \label{fig:1}
+    \end{figure}
+\item Test speed control, incline control, and emergency stop modules to ensure they are working properly.
+\item Remove treadmill motor cover.
+    \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\linewidth]{Eagle_Eye_View_4.png}
+            \caption{Motor Controller and Motor}
+            \label{fig:2}
+    \end{figure}
+    
+% Column break
+\vfill\eject
+
+\item Feed the bundled control wires through the arm of the treadmill.
+\item Remove the arms of the treadmill using an angle grinder.
+\item (Optional) Place electric tape or other safeguard on sharp ends of your cut.
+    \begin{figure}[H]
+            \centering
+            \includegraphics[height=70mm,width=0.5\linewidth]{Treadmill_Without_Arms.jpg}
+            \caption{Treadmill Without Arms}
+            \label{fig:3}
+    \end{figure}
+\item Implement a two channel relay module to control incline control. We chose a two channel optical isolated relay module in order to add an extra safeguard so that we don't connect the two output wires that connect to the incline motor. The logic itself comes directly from the Arduino which totally separates the Arduino and the 110 Volts of AC coming through the board so you significantly reduce the chance of frying your board!
+    \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\linewidth]{Two_Relay_Module.png}
+            \caption{Two Relay Module}
+            \label{fig:4}
+    \end{figure}
+\pagebreak
+\item Implement a function to control voltage output of a PWM pin on an Arduino (we chose to map to a scale from 0-100 instead of the default 0-255).
+\begin{lstlisting}[language=Arduino]
+void run(int percent_power) {
+    int val = map(percent_power, 0, 100, 0, 255);
+    analogWrite(output_pin, val);
+}
+\end{lstlisting}
+\item An optional feature for us was using a non-inverting operational amplifier to create a gain of 2.4 in order to map the 5 volt capacity of the Arduino onto the 12 volts of the treadmill.
+    \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\linewidth]{Op_Amp.jpg}
+            \caption{Non-inverting operation amplifier (Not attached to Arduino or Power Supply)}
+            \label{fig:5}
+    \end{figure}
+
+% Column break
+\vfill\eject
+
+\item Implement a function to control incline logic using two digital pins and the 5 Volt power supply from the Arduino.
+\begin{lstlisting}[language=Arduino]
+// Incline logic  to select which 
+// gates should be open
+void change_incline(int input){
+    if (input == 1){
+        incline_up();
+    }
+    else if (input == 2){
+        incline_down();
+    }
+    else if (input == 3){
+        off();
+    }
+}
+
+// Enable gate 1 (IN1) on the relay
+void incline_up(){
+    digitalWrite(IN1,LOW);
+}
+
+// Enable gates 1(IN1) and 2(IN2) on 
+// the relay
+void incline_down(){
+    digitalWrite(IN1,HIGH);
+    digitalWrite(IN2,LOW);
+}
+
+// Disable gates 1(IN1) and 2(IN2)
+// on the relay
+void off(){\usepackage{xcolor}
+\usepackage{environ}
+\usepackage{eso-pic}
+    digitalWrite(IN1,HIGH);
+    digitalWrite(IN2,HIGH);
+}
+
+\end{lstlisting}
+
+\pagebreak
+
+\item Implement parsing from serial communnication in the main loop.
+\begin{lstlisting}[language=Arduino]
+// When input comes in
+if(Serial.available()){ 
+
+    // Parsing serial input
+    String input_command = Serial.readString();
+    String parses[2];
+    int index = input_command.indexOf(' ');
+    parses[0] = input_command.substring(0,index);
+    parses[1] = (input_command.substring(index+1));
+
+    // Checks if incoming statement 
+    // is speed(S) or incline(I) related
+    if (parses[0] == String("S")){
+    
+        // set treadmill speed
+        run(parses[1].toInt()); 
+    }
+    else if (parses[0] == String("I")){
+    
+        // Set incline to up or down
+        change_incline(parses[1].toInt());
+    }
+    else {
+    
+        // Stops the treadmill in case
+        //of extraneous case
+        run(0);
+    }
+}
+\end{lstlisting}
+\pagebreak
+\item Don't forget to initialize the relays and speed control!
+\begin{lstlisting}[language=Arduino]
+void setup(){
+
+    // Set the pins controlling speed 
+    // and incline logic to be output
+    pinMode(speed_pin, OUTPUT);
+    pinMode(IN1, OUTPUT);
+    pinMode(IN2, OUTPUT);
+
+    // Begin communication with 
+    // serial input
+    Serial.begin(9600); 
+
+    // Set the treadmill to off
+    analogWrite(speed_pin,0); // Speed
+    off(); // Incline
+}
+\end{lstlisting}
+
+\item Next implement any interface with the Arduino, we went with two interfaces, one written in pure HTML and the other with Svelte.
+    \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{Treadmill_HTML.png}
+            \caption{HTML Site Design (\MYhref{https://leo-berman.github.io/Treadmill-To-Walking-Pad-HTML/}{Try it out!}) }
+            \label {fig: 6}
+    \end{figure}
+
+    \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{Treadmill_Svelte.png}
+            \caption{Svelte Site Design (\MYhref{https://leo-berman.github.io/Treadmill-To-Walking-Pad-Svelte/}{Try it out!}) }
+            \label{fig:7}
+    \end{figure}
+\item For the full Arduino code check out \MYhref{https://github.com/Leo-Berman/Treadmill-To-Walking-Pad/blob/945cfb8c59715d0fab2927238e48ba3bab0aa0fc/Treadmill_Controller_1/Treadmill_Controller_1.ino}{this portion of our GitHub} and for the Svelte and HTML, check out \MYhref{https://github.com/Leo-Berman/Treadmill-To-Walking-Pad/tree/945cfb8c59715d0fab2927238e48ba3bab0aa0fc/site}{this portion of our GitHub}
+\item Finally we need to connect the Arduino and the website. We can do this by using a RaspberryPi on our local network to host the website! We used Python3 Flask 
+
+% Column break
+\vfill\eject
+
+\item First we initialize the serial port on the RaspberryPi.
+\begin{lstlisting}[language=Python]
+# sets the serial port
+ser = serial.Serial(
+    port='/dev/ttyACM0',
+    baudrate=9600,
+    parity=serial.PARITY_NONE,
+    stopbits=serial.STOPBITS_ONE,
+    bytesize=serial.EIGHTBITS,
+    timeout=0    
+)
+\end{lstlisting}
+
+\item Next we build our sites!
+\begin{lstlisting}[language=Python]
+# serving index.html to the main website endpoint
+@app.route("/")
+def index():
+     return render_template('index.html')
+
+@app.route("/fancy")
+def base():
+    return send_from_directory('my-app/build', 'index.html')
+
+# Path for all the static files (compiled JS/CSS, etc.)
+@app.route("/<path:path>")
+def home(path):
+    return send_from_directory('my-app/build', path)
+\end{lstlisting}
+
+\item Finally, we initialize our endpoints using this format. If you're interested in our full Python Flask code check out \MYhref{https://github.com/Leo-Berman/Treadmill-To-Walking-Pad/blob/945cfb8c59715d0fab2927238e48ba3bab0aa0fc/site/webserver.py}{this portion of our GitHub}
+\begin{lstlisting}[language=Python]
+# Generate endpoint for 
+@app.route('/speed/incline/<int:value>')
+def speed(value):
+    # Prints to the local console 
+    print(f"Setting speed/incline to {value}")
+    
+    # call set speed/incline function given value read from endpoint
+    set_speed/incline(value)
+    
+    # return value read to api
+    return f"{value}"
+\end{lstlisting}
+
+\item Connect everything together!
+    \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\linewidth]{Everything_Wired.jpg}
+            \caption{Everything Connected}
+            \label{fig:8}
+    \end{figure}
+\end{enumerate}
+
+\section{Launch Guide}
+\begin{enumerate}
+
+\item Plug your RaspberryPi into a monitor and keyboard (We recommend starting in terminal-only mode in order to optimize efficiency as this is all possible through the terminal).
+
+\item Next, connect to WiFi. From here you can perform all other tasks via SSH.
+
+\item Once you have successfully connected to the RaspberryPi via SSH, install pip, flask, venv, and optionally nmcli.  
+\item Add an authorized key to your github account in order to clone \MYhref{https://github.com/Leo-Berman/Treadmill-To-Walking-Pad.git}{this GitHub Repository}
+
+\item Navigate to where the repository was cloned and activate your virtual environment:\\ bash:\textbackslash\textdollar\space source venv/bin/activate
+
+\item Use the command below and note/copy your inet IP address.:\\
+bash:\textbackslash\textdollar\space ifconfig
+
+
+\item Finally, launch the website:\\
+bash:\textbackslash\textdollar\space flask --app webserver.py run -host "inet IP"
+
+\item Congratulations! This will launch the website and you can connect using the link fed back to you in the terminal.
+
+\end{enumerate}
+
+\section{Conclusion}
+\indent In the bittersweet conclusion of this project, we've learned a lot about wiring, circuitry, embedded systems, web design, UX, serial interfacing, Git, GitHub, and much more. Most importantly, we have a working final product that goes above and beyond my initial expectations of the project. Is it possibly over-engineered? Perhaps, but it's a really cool project and if anybody has an old treadmill at home, it's one we would recommend trying. However, when trying this at home, just know that your treadmill could be different so there are no guarantees in terms of how it's controlled or if it will be the same as ours. Furthermore, experimenting with electronics is inherently dangerous and should be approached with caution and care.\\
+\indent Two things we hope to eventually implement are some more safe insulation around the electronics we have on the outside and to cover the sharp edges left over from angle grinding.\\
+\indent For all of our code please access our \MYhref{https://github.com/Leo-Berman/Treadmill-To-Walking-Pad.git}{GitHub Repository} and feel free to reach out to our emails with any questions you have in regards to our paper. Without any further adieu, here is the final product. (It's not super impressive to look at but here's a \MYhref{https://drive.google.com/file/d/1rSkrefvcTBKX7KH033j2z0Tslr1Mf0Wk/view?usp=drive_link}{demo video of Leo doing math on the treadmill} and \MYhref{https://drive.google.com/file/d/1RXOLTaLV5otzCxjDomMnXNWlTBuZ_7U1/view?usp=drive_link}{Liam showing off the user interface}.
+
+\pagebreak
+
+
+\begin{figure*} [!h]
+\centering
+\includegraphics[width=\linewidth]{Final_Product.jpg}
+\caption{Final Product}
+  \label{Fig: 9l}
+\end{figure*}
+% \begin{figure}[H]
+%             \centering
+%             \includegraphics[width=2\linewidth]{Final_Product.jpg}
+%             \begin{center}
+%                     \caption{Final Product}
+%             \end{center}
+    
+%             \label{fig:9}
+%     \end{figure}
+
+\end{document}
+
+
