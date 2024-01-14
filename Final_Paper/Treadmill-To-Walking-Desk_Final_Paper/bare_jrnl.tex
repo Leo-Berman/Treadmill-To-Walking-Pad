@@ -64,7 +64,7 @@ RIT\\
 Liam@megster.com\\
 \end{center}
 \begin{abstract}
-This paper presents a step-by-step guide on how we converted the Proform XL Crosswalk treadmill into a Low Profile Walking Pad controlled by a website interface. Initially, we performed a diagnostic assessment of the main dashboard and determined how it communicates with the treadmill motor controllers. Next, we built an Arduino control system that receives commands via serial input. Finally, we designed a website to control the RaspberryPi with a seamless UX.
+This paper presents a step-by-step guide on how we converted the Proform XL Crosswalk treadmill into a Low Profile Walking Pad controlled by a website interface. Initially, we performed a diagnostic assessment of the main dashboard and determined how it communicates with the treadmill motor controllers. Next, we built an Arduino control system that receives commands via serial input. Finally, we designed a website to control the Raspberry Pi with a seamless UX.
 \end{abstract}
 \IEEEpeerreviewmaketitle
 
@@ -233,12 +233,12 @@ void setup(){
             \label{fig:7}
     \end{figure}
 \item For the full Arduino code check out \MYhref{https://github.com/Leo-Berman/Treadmill-To-Walking-Pad/blob/945cfb8c59715d0fab2927238e48ba3bab0aa0fc/Treadmill_Controller_1/Treadmill_Controller_1.ino}{this portion of our GitHub} and for the Svelte and HTML, check out \MYhref{https://github.com/Leo-Berman/Treadmill-To-Walking-Pad/tree/945cfb8c59715d0fab2927238e48ba3bab0aa0fc/site}{this portion of our GitHub}
-\item Finally we need to connect the Arduino and the website. We can do this by using a RaspberryPi on our local network to host the website! We used Python3 Flask 
+\item Finally we need to connect the Arduino and the website. We can do this by using a Raspberry Pi on our local network to host the website! We used Python3 Flask 
 
 % Column break
 \vfill\eject
 
-\item First we initialize the serial port on the RaspberryPi.
+\item First we initialize the serial port on the Raspberry Pi.
 \begin{lstlisting}[language=Python]
 # sets the serial port
 ser = serial.Serial(
@@ -295,11 +295,11 @@ def speed(value):
 \section{Launch Guide}
 \begin{enumerate}
 
-\item Plug your RaspberryPi into a monitor and keyboard (We recommend starting in terminal-only mode in order to optimize efficiency as this is all possible through the terminal).
+\item Plug your Raspberry Pi into a monitor and keyboard (We recommend starting in terminal-only mode in order to optimize efficiency as this is all possible through the terminal).
 
 \item Next, connect to WiFi. From here you can perform all other tasks via SSH.
 
-\item Once you have successfully connected to the RaspberryPi via SSH, install pip, flask, venv, and optionally nmcli.  
+\item Once you have successfully connected to the Raspberry Pi via SSH, install pip, flask, venv, and optionally nmcli.  
 \item Add an authorized key to your github account in order to clone \MYhref{https://github.com/Leo-Berman/Treadmill-To-Walking-Pad.git}{this GitHub Repository}
 
 \item Navigate to where the repository was cloned and activate your virtual environment:\\ bash:\textbackslash\textdollar\space source venv/bin/activate
