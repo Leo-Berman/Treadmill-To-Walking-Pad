@@ -4,3 +4,4 @@ In terms of the languages we used, LaTeX was only used for the final paper write
 Here's our [google drive](https://drive.google.com/drive/folders/1N29aYL1at1YB_VjGNjzPlnmqFIkKpkeo?usp=drive_link) with pictures and videos.
 
 Note: I need to add the part about setting up a venv for the site :o.
+Note2: I need to add a part about letting the raspberrypi host the website on startup and I also need to include that file in the github
