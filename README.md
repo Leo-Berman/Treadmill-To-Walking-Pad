@@ -32,6 +32,9 @@ sudo systemctl enable tread
 
 
 # Getting Started
+## Download this github repository.
+
+## Set up wiring as found in our final paper
 
 ## Flash the Arduino
 1. Download the Aduino IDE and open the file to be flashed (Treadmill_Controller_1.ino).
