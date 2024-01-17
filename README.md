@@ -4,7 +4,32 @@ In terms of the languages we used, LaTeX was only used for the final paper write
 Here's our [google drive](https://drive.google.com/drive/folders/1N29aYL1at1YB_VjGNjzPlnmqFIkKpkeo?usp=drive_link) with pictures and videos.
 
 Note: I need to add the part about setting up a venv for the site :o.
-Note2: I need to add a part about letting the raspberrypi host the website on startup and I also need to include that file in the github
+# Setting up to launch on startup
+1. Run this command to generate a service
+```sh
+sudo nano /lib/systemd/system/tread.service
+```
+2. Enter this in the text file
+```sh
+[Unit]
+ Description=My Sample Service
+ After=multi-user.target
+
+ [Service]
+ Type=idle
+ ExecStart=/home/laufband/Treadmill-To-Walking-Pad/site/venv/bin/flask --app /home/laufband/Treadmill-To-Walking-Pad/site/webserver.py run -h 10.0.0.91
+ Restart=on-failure
+
+ [Install]
+ WantedBy=multi-user.target
+```
+3. Run these two commands
+```sh
+sudo systemctl daemon-reload
+sudo systemctl enable tread
+```
+
+
 
 # Getting Started
 
