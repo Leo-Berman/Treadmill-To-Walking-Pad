@@ -293,27 +293,8 @@ def speed(value):
 \end{enumerate}
 
 \section{Launch Guide}
-\begin{enumerate}
 
-\item Plug your Raspberry Pi into a monitor and keyboard (We recommend starting in terminal-only mode in order to optimize efficiency as this is all possible through the terminal).
-
-\item Next, connect to WiFi. From here you can perform all other tasks via SSH.
-
-\item Once you have successfully connected to the Raspberry Pi via SSH, install pip, flask, venv, and optionally nmcli.  
-\item Add an authorized key to your github account in order to clone \MYhref{https://github.com/Leo-Berman/Treadmill-To-Walking-Pad.git}{this GitHub Repository}
-
-\item Navigate to where the repository was cloned and activate your virtual environment:\\ bash:\textbackslash\textdollar\space source venv/bin/activate
-
-\item Use the command below and note/copy your inet IP address.:\\
-bash:\textbackslash\textdollar\space ifconfig
-
-
-\item Finally, launch the website:\\
-bash:\textbackslash\textdollar\space flask --app webserver.py run -host "inet IP"
-
-\item Congratulations! This will launch the website and you can connect using the link fed back to you in the terminal.
-
-\end{enumerate}
+Refer to our \MYhref{https://github.com/Leo-Berman/Treadmill-To-Walking-Pad/blob/04a683261e5eefc8c90345b094c1a1721491e781/README.md}{GitHub Readme} for our quickstart guide.
 
 \section{Conclusion}
 \indent In the bittersweet conclusion of this project, we've learned a lot about wiring, circuitry, embedded systems, web design, UX, serial interfacing, Git, GitHub, and much more. Most importantly, we have a working final product that goes above and beyond my initial expectations of the project. Is it possibly over-engineered? Perhaps, but it's a really cool project and if anybody has an old treadmill at home, it's one we would recommend trying. However, when trying this at home, just know that your treadmill could be different so there are no guarantees in terms of how it's controlled or if it will be the same as ours. Furthermore, experimenting with electronics is inherently dangerous and should be approached with caution and care.\\
@@ -325,7 +306,7 @@ bash:\textbackslash\textdollar\space flask --app webserver.py run -host "inet IP
 
 \begin{figure*} [!h]
 \centering
-\includegraphics[width=\linewidth]{Final_Product.jpg}
+\includegraphics[width=\linewidth]{InMyRoomFinalProduct.jpg}
 \caption{Final Product}
   \label{Fig: 9l}
 \end{figure*}
@@ -340,5 +321,6 @@ bash:\textbackslash\textdollar\space flask --app webserver.py run -host "inet IP
 %     \end{figure}
 
 \end{document}
+
 
 
