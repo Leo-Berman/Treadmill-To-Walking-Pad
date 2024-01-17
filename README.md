@@ -34,7 +34,7 @@ sudo systemctl enable tread
 # Getting Started
 
 ## Flash the Arduino
-1. Download the Aduino IDE and open the file to be flashed.
+1. Download the Aduino IDE and open the file to be flashed (Treadmill_Controller_1.ino).
 2. Plugin the Arduino and flash the Arduino.
 3. Connect the Arduino to the same device running the server. In our case this is the Raspberry Pi.
 4. Start the web server.
@@ -42,6 +42,7 @@ sudo systemctl enable tread
 
 
 ## Run the Server on the Local Network
+## From the downloaded github repository main file.
 ```sh
 cd site
 ```
