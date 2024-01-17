@@ -42,7 +42,7 @@ sudo systemctl enable tread
 
 
 ## Run the Server on the Local Network
-## From the downloaded github repository main file.
+From the downloaded github repository main file.
 ```sh
 cd site
 ```
